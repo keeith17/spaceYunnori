@@ -1,11 +1,13 @@
 import AuthContext from "@/context/AuthContext";
 import { app, db } from "@/firebaseApp";
 import { Box, Button } from "@mui/material";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { getAuth, signOut } from "firebase/auth";
 import {
     addDoc,
     collection,
+    doc,
+    getDoc,
     onSnapshot,
     orderBy,
     query,
@@ -21,10 +23,20 @@ interface LogProps {
         four: string;
     };
     id: string;
+    name: string;
 }
+
+interface CharProps {
+    email: string;
+    name: string;
+    uid: string;
+}
+
 export default function FourYut() {
     const { user } = useContext(AuthContext);
+    const userUid = user?.uid;
     const [log, setLog] = useState<LogProps[]>([]);
+
     const handleSubmit = (
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
@@ -52,11 +64,32 @@ export default function FourYut() {
                     three: Math.random() > 0.5 ? "앞" : "뒤",
                     four: Math.random() > 0.5 ? "앞" : "뒤",
                 },
+                name: myChar?.name,
             });
         },
         onSuccess: (data) => {
             console.log(data, "하여튼 성공");
         },
+    });
+
+    const fetchMyChar = async () => {
+        if (userUid) {
+            try {
+                const docRef = doc(db, "users", userUid);
+                const postSnap = await getDoc(docRef);
+                const data = {
+                    ...postSnap?.data(),
+                } as CharProps;
+                return data;
+            } catch (error) {
+                console.error("Error fetching posts:", error);
+            }
+        }
+    };
+
+    const { data: myChar } = useQuery({
+        queryKey: ["myChar"],
+        queryFn: fetchMyChar,
     });
 
     useEffect(() => {
@@ -74,6 +107,7 @@ export default function FourYut() {
     useEffect(() => {
         console.log(log);
     }, [log]);
+
     return (
         <Box
             sx={{
@@ -160,9 +194,10 @@ export default function FourYut() {
             >
                 {log.map((result, index) => (
                     <Box key={index}>
-                        {result?.timeStamp}
+                        {result?.name} 님이
+                        {result?.timeStamp} 에 윷을 던져
                         {result?.result.one},{result?.result.two},
-                        {result?.result.three},{result?.result.four}
+                        {result?.result.three},{result?.result.four} 이
                         나왔습니다!
                     </Box>
                 ))}

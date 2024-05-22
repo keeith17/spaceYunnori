@@ -2,7 +2,7 @@ import { mainColor, wrapStyle } from "@/commonStyle";
 import { app, db } from "@/firebaseApp";
 import { Box, styled } from "@mui/material";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
