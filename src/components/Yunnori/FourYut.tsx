@@ -1,6 +1,7 @@
 import AuthContext from "@/context/AuthContext";
 import { app, db } from "@/firebaseApp";
-import { Box, Button } from "@mui/material";
+import { CustomButton } from "@/pages/Login";
+import { Box } from "@mui/material";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { getAuth, signOut } from "firebase/auth";
 import {
@@ -8,10 +9,12 @@ import {
     collection,
     doc,
     getDoc,
+    limit,
     onSnapshot,
     orderBy,
     query,
 } from "firebase/firestore";
+import { motion } from "framer-motion";
 import { useContext, useEffect, useState } from "react";
 
 interface LogProps {
@@ -56,7 +59,7 @@ export default function FourYut() {
     const { user } = useContext(AuthContext);
     const userUid = user?.uid;
     const [log, setLog] = useState<LogProps[]>([]);
-
+    const [load, setLoad] = useState<boolean>(false);
     const handleSubmit = (
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
@@ -82,7 +85,7 @@ export default function FourYut() {
                     one: Math.random() > 0.5 ? "앞" : "뒤",
                     two: Math.random() > 0.5 ? "앞" : "뒤",
                     three: Math.random() > 0.5 ? "앞" : "뒤",
-                    four: Math.random() > 0.5 ? "앞" : "뒤",
+                    four: Math.random() > 0.5 ? "앞" : "깊은 뒤",
                 },
                 name: myChar?.name,
             });
@@ -114,15 +117,28 @@ export default function FourYut() {
 
     useEffect(() => {
         const LogRef = collection(db, "result");
-        const LogQuery = query(LogRef, orderBy("timeStamp", "desc"));
-        onSnapshot(LogQuery, (snapShot) => {
+        const LogQuery = query(LogRef, orderBy("timeStamp", "desc"), limit(30));
+        const unsubscribe = onSnapshot(LogQuery, (snapShot) => {
             const dataObj = snapShot?.docs?.map((doc) => ({
                 ...doc?.data(),
                 id: doc?.id,
             }));
+            setLoad(true);
             setLog(dataObj as LogProps[]);
         });
+        return () => unsubscribe();
     }, []);
+
+    useEffect(() => {
+        if (load) {
+            const timer = setTimeout(() => {
+                setLoad(false);
+            }, 3000);
+
+            // Cleanup timer on component unmount or if load changes
+            return () => clearTimeout(timer);
+        }
+    }, [load]);
 
     useEffect(() => {
         console.log(log);
@@ -162,18 +178,24 @@ export default function FourYut() {
                     sx={{
                         width: "20%",
                         height: "100%",
-                        borderRight: "1px solid white",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
                     }}
                 >
-                    <Button variant="outlined" onClick={handleSubmit}>
+                    <CustomButton
+                        sx={{
+                            border: "none",
+                        }}
+                        onClick={handleSubmit}
+                    >
                         던져라!
-                    </Button>
+                    </CustomButton>
                 </Box>
                 <Box
                     sx={{
                         width: "20%",
                         height: "100%",
-                        borderRight: "1px solid white",
                     }}
                 >
                     {log[0]?.result?.one === "앞" ? (
@@ -190,7 +212,6 @@ export default function FourYut() {
                     sx={{
                         width: "20%",
                         height: "100%",
-                        borderRight: "1px solid white",
                         img: {
                             width: "100%",
                         },
@@ -210,7 +231,6 @@ export default function FourYut() {
                     sx={{
                         width: "20%",
                         height: "100%",
-                        borderRight: "1px solid white",
                         img: {
                             width: "100%",
                         },
@@ -230,10 +250,19 @@ export default function FourYut() {
                     sx={{
                         width: "20%",
                         height: "100%",
-                        borderRight: "1px solid white",
                     }}
                 >
-                    {log[0]?.result?.four === "앞" ? (
+                    {load ? (
+                        <motion.div
+                            animate={{ x: 100 }}
+                            transition={{ duration: 0.5 }}
+                            style={{
+                                width: "100px",
+                                height: "100px",
+                                backgroundColor: "blue",
+                            }}
+                        />
+                    ) : log[0]?.result?.four === "앞" ? (
                         <Box sx={frontBox}>
                             <img src="/images/front.png" />
                         </Box>
@@ -248,15 +277,22 @@ export default function FourYut() {
                 sx={{
                     width: "100%",
                     height: "70%",
+                    overflow: "scroll",
                 }}
             >
                 {log.map((result, index) => (
-                    <Box key={index}>
-                        {result?.name} 님이
-                        {result?.timeStamp} 에 윷을 던져
-                        {result?.result.one},{result?.result.two},
-                        {result?.result.three},{result?.result.four} 이
-                        나왔습니다!
+                    <Box
+                        key={index}
+                        sx={{
+                            width: "100%",
+                            padding: "10px",
+                            display: "flex",
+                            justifyContent: "center",
+                            fontSize: "16px",
+                            fontFamily: "nexonGothic",
+                        }}
+                    >
+                        {`${result?.name} 님이 ${result?.timeStamp} 에 윷을 던져 [${result?.result.one}, ${result?.result.two}, ${result?.result.three}, ${result?.result.four}]이 나왔습니다!`}
                     </Box>
                 ))}
             </Box>
