@@ -124,21 +124,27 @@ export default function FourYut() {
                 id: doc?.id,
             }));
             setLoad(true);
-            setLog(dataObj as LogProps[]);
+
+            setTimeout(() => {
+                setLoad(false);
+                setLog(dataObj as LogProps[]);
+            }, 1500);
+            // setLoad(true);
+            // setLog(dataObj as LogProps[]);
         });
         return () => unsubscribe();
     }, []);
 
-    useEffect(() => {
-        if (load) {
-            const timer = setTimeout(() => {
-                setLoad(false);
-            }, 3000);
+    // useEffect(() => {
+    //     if (load) {
+    //         const timer = setTimeout(() => {
+    //             setLoad(false);
+    //         }, 3000);
 
-            // Cleanup timer on component unmount or if load changes
-            return () => clearTimeout(timer);
-        }
-    }, [load]);
+    //         // Cleanup timer on component unmount or if load changes
+    //         return () => clearTimeout(timer);
+    //     }
+    // }, [load]);
 
     useEffect(() => {
         console.log(log);
