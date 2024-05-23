@@ -13,13 +13,10 @@ export const CustomInput = styled("input")({
     background: "transparent",
     padding: "10px",
     fontSize: "16px",
-    border: "2px solid #ccc",
+    border: "2px solid #eee",
     borderRadius: "4px",
     outline: "none",
     "&:focus": {
-        borderColor: mainColor,
-    },
-    "&:hover": {
         borderColor: mainColor,
     },
 });
@@ -31,16 +28,12 @@ export const CustomButton = styled("button")({
     background: "transparent",
     padding: "10px",
     fontSize: "16px",
-    border: "2px solid #ccc",
+    border: "2px solid #eee",
     borderRadius: "4px",
     outline: "none",
-    "&:focus": {
-        background: mainColor,
-        borderColor: mainColor,
-    },
     "&:hover": {
-        background: mainColor,
         borderColor: mainColor,
+        background: mainColor,
     },
     transition: "all .2s",
 });
@@ -95,6 +88,7 @@ export default function Login() {
                     flexDirection: "column",
                     gap: "10px",
                     alignItems: "center",
+                    justifyContent: "center",
                 }}
             >
                 <CustomInput

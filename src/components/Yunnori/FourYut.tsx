@@ -32,6 +32,26 @@ interface CharProps {
     uid: string;
 }
 
+const frontBox = {
+    width: "100%",
+    padding: "15%",
+    img: {
+        width: "100%",
+    },
+};
+const backBox = {
+    width: "100%",
+    img: {
+        width: "100%",
+    },
+};
+const backbackBox = {
+    width: "100%",
+    padding: "5%",
+    img: {
+        width: "100%",
+    },
+};
 export default function FourYut() {
     const { user } = useContext(AuthContext);
     const userUid = user?.uid;
@@ -156,7 +176,55 @@ export default function FourYut() {
                         borderRight: "1px solid white",
                     }}
                 >
-                    {log[0]?.result?.one}
+                    {log[0]?.result?.one === "앞" ? (
+                        <Box sx={frontBox}>
+                            <img src="/images/front.png" />
+                        </Box>
+                    ) : (
+                        <Box sx={backBox}>
+                            <img src="/images/back.png" />
+                        </Box>
+                    )}
+                </Box>
+                <Box
+                    sx={{
+                        width: "20%",
+                        height: "100%",
+                        borderRight: "1px solid white",
+                        img: {
+                            width: "100%",
+                        },
+                    }}
+                >
+                    {log[0]?.result?.two === "앞" ? (
+                        <Box sx={frontBox}>
+                            <img src="/images/front.png" />
+                        </Box>
+                    ) : (
+                        <Box sx={backBox}>
+                            <img src="/images/back.png" />
+                        </Box>
+                    )}
+                </Box>
+                <Box
+                    sx={{
+                        width: "20%",
+                        height: "100%",
+                        borderRight: "1px solid white",
+                        img: {
+                            width: "100%",
+                        },
+                    }}
+                >
+                    {log[0]?.result?.three === "앞" ? (
+                        <Box sx={frontBox}>
+                            <img src="/images/front.png" />
+                        </Box>
+                    ) : (
+                        <Box sx={backBox}>
+                            <img src="/images/back.png" />
+                        </Box>
+                    )}
                 </Box>
                 <Box
                     sx={{
@@ -165,25 +233,15 @@ export default function FourYut() {
                         borderRight: "1px solid white",
                     }}
                 >
-                    {log[0]?.result?.two}
-                </Box>
-                <Box
-                    sx={{
-                        width: "20%",
-                        height: "100%",
-                        borderRight: "1px solid white",
-                    }}
-                >
-                    {log[0]?.result?.three}
-                </Box>
-                <Box
-                    sx={{
-                        width: "20%",
-                        height: "100%",
-                        borderRight: "1px solid white",
-                    }}
-                >
-                    {log[0]?.result?.four}
+                    {log[0]?.result?.four === "앞" ? (
+                        <Box sx={frontBox}>
+                            <img src="/images/front.png" />
+                        </Box>
+                    ) : (
+                        <Box sx={backbackBox}>
+                            <img src="/images/backback.png" />
+                        </Box>
+                    )}
                 </Box>
             </Box>
             <Box
