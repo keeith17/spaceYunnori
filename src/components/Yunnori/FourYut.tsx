@@ -1,7 +1,7 @@
 import AuthContext from "@/context/AuthContext";
 import { app, db } from "@/firebaseApp";
 import { CustomButton } from "@/pages/Login";
-import { Box } from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { getAuth, signOut } from "firebase/auth";
 import {
@@ -69,6 +69,8 @@ export default function FourYut() {
     const userUid = user?.uid;
     const [log, setLog] = useState<LogProps[]>([]);
     const [load, setLoad] = useState<boolean>(false);
+    const theme = useTheme();
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down("lg"));
     const handleSubmit = (
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
@@ -91,10 +93,10 @@ export default function FourYut() {
             await addDoc(recordRef, {
                 timeStamp: myTimeStamp,
                 result: {
-                    one: Math.random() > 0.5 ? "앞" : "뒤",
-                    two: Math.random() > 0.5 ? "앞" : "뒤",
-                    three: Math.random() > 0.5 ? "앞" : "뒤",
-                    four: Math.random() > 0.5 ? "앞" : "뒤",
+                    one: Math.random() > 0.65 ? "앞" : "뒤",
+                    two: Math.random() > 0.65 ? "앞" : "뒤",
+                    three: Math.random() > 0.65 ? "앞" : "뒤",
+                    four: Math.random() > 0.65 ? "앞" : "뒤",
                 },
                 name: myChar?.name,
             });
@@ -187,12 +189,13 @@ export default function FourYut() {
                     width: "100%",
                     height: "25%",
                     display: "flex",
+                    flexFlow: "wrap",
                 }}
             >
                 <Box
                     sx={{
-                        width: "20%",
-                        height: "100%",
+                        width: isSmallScreen ? "100%" : "20%",
+                        height: isSmallScreen ? "30%" : "100%",
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
@@ -210,8 +213,8 @@ export default function FourYut() {
                 </Box>
                 <Box
                     sx={{
-                        width: "20%",
-                        height: "100%",
+                        width: isSmallScreen ? "25%" : "20%",
+                        height: isSmallScreen ? "70%" : "100%",
                     }}
                 >
                     {load ? (
@@ -228,8 +231,8 @@ export default function FourYut() {
                 </Box>
                 <Box
                     sx={{
-                        width: "20%",
-                        height: "100%",
+                        width: isSmallScreen ? "25%" : "20%",
+                        height: isSmallScreen ? "70%" : "100%",
                         img: {
                             width: "100%",
                         },
@@ -249,8 +252,8 @@ export default function FourYut() {
                 </Box>
                 <Box
                     sx={{
-                        width: "20%",
-                        height: "100%",
+                        width: isSmallScreen ? "25%" : "20%",
+                        height: isSmallScreen ? "70%" : "100%",
                         img: {
                             width: "100%",
                         },
@@ -270,8 +273,8 @@ export default function FourYut() {
                 </Box>
                 <Box
                     sx={{
-                        width: "20%",
-                        height: "100%",
+                        width: isSmallScreen ? "25%" : "20%",
+                        height: isSmallScreen ? "70%" : "100%",
                     }}
                 >
                     {load ? (

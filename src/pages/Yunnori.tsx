@@ -1,13 +1,15 @@
 import { wrapStyle } from "@/commonStyle";
 import FourYut from "@/components/Yunnori/FourYut";
-import { Box } from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 
 export default function Yunnori() {
+    const theme = useTheme();
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down("lg"));
     return (
         <Box sx={wrapStyle}>
             <Box
                 sx={{
-                    width: "50%",
+                    width: isSmallScreen ? "100%" : "50%",
                     height: "100%",
                 }}
             >

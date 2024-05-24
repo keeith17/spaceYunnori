@@ -1,13 +1,13 @@
 import { mainColor, wrapStyle } from "@/commonStyle";
 import { app, db } from "@/firebaseApp";
-import { Box, styled } from "@mui/material";
+import { Box, styled, useMediaQuery, useTheme } from "@mui/material";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const CustomInput = styled("input")({
-    width: "50%",
+    width: "60%",
     height: "50px",
     color: "white",
     background: "transparent",
@@ -22,7 +22,7 @@ export const CustomInput = styled("input")({
 });
 
 export const CustomButton = styled("button")({
-    width: "50%",
+    width: "60%",
     height: "50px",
     color: "white",
     background: "transparent",
@@ -41,6 +41,8 @@ export default function Login() {
     const [id, setId] = useState<string>("");
     const [pw, setPw] = useState<string>("");
     const [char, setChar] = useState<string>("");
+    const theme = useTheme();
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down("lg"));
     const navigate = useNavigate();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,7 +84,7 @@ export default function Login() {
         <Box sx={wrapStyle}>
             <Box
                 sx={{
-                    width: "50%",
+                    width: isSmallScreen ? "100%" : "50%",
                     height: "100%",
                     display: "flex",
                     flexDirection: "column",
