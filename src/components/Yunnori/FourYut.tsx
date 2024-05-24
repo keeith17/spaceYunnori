@@ -16,6 +16,7 @@ import {
 } from "firebase/firestore";
 import { motion } from "framer-motion";
 import { useContext, useEffect, useState } from "react";
+import LoadMotion from "./LoadMotion";
 
 interface LogProps {
     timeStamp: string;
@@ -37,19 +38,28 @@ interface CharProps {
 
 const frontBox = {
     width: "100%",
+    height: "100%",
     padding: "15%",
+    display: "flex",
+    alignItems: "center",
     img: {
         width: "100%",
     },
 };
 const backBox = {
     width: "100%",
+    height: "100%",
+    display: "flex",
+    alignItems: "center",
     img: {
         width: "100%",
     },
 };
 const backbackBox = {
     width: "100%",
+    height: "100%",
+    display: "flex",
+    alignItems: "center",
     padding: "5%",
     img: {
         width: "100%",
@@ -85,7 +95,7 @@ export default function FourYut() {
                     one: Math.random() > 0.5 ? "앞" : "뒤",
                     two: Math.random() > 0.5 ? "앞" : "뒤",
                     three: Math.random() > 0.5 ? "앞" : "뒤",
-                    four: Math.random() > 0.5 ? "앞" : "깊은 뒤",
+                    four: Math.random() > 0.5 ? "앞" : "뒤",
                 },
                 name: myChar?.name,
             });
@@ -194,6 +204,7 @@ export default function FourYut() {
                             border: "none",
                         }}
                         onClick={handleSubmit}
+                        disabled={load}
                     >
                         던져라!
                     </CustomButton>
@@ -204,7 +215,9 @@ export default function FourYut() {
                         height: "100%",
                     }}
                 >
-                    {log[0]?.result?.one === "앞" ? (
+                    {load ? (
+                        <LoadMotion />
+                    ) : log[0]?.result?.one === "앞" ? (
                         <Box sx={frontBox}>
                             <img src="/images/front.png" />
                         </Box>
@@ -223,7 +236,9 @@ export default function FourYut() {
                         },
                     }}
                 >
-                    {log[0]?.result?.two === "앞" ? (
+                    {load ? (
+                        <LoadMotion />
+                    ) : log[0]?.result?.two === "앞" ? (
                         <Box sx={frontBox}>
                             <img src="/images/front.png" />
                         </Box>
@@ -242,7 +257,9 @@ export default function FourYut() {
                         },
                     }}
                 >
-                    {log[0]?.result?.three === "앞" ? (
+                    {load ? (
+                        <LoadMotion />
+                    ) : log[0]?.result?.three === "앞" ? (
                         <Box sx={frontBox}>
                             <img src="/images/front.png" />
                         </Box>
@@ -259,15 +276,7 @@ export default function FourYut() {
                     }}
                 >
                     {load ? (
-                        <motion.div
-                            animate={{ x: 100 }}
-                            transition={{ duration: 0.5 }}
-                            style={{
-                                width: "100px",
-                                height: "100px",
-                                backgroundColor: "blue",
-                            }}
-                        />
+                        <LoadMotion />
                     ) : log[0]?.result?.four === "앞" ? (
                         <Box sx={frontBox}>
                             <img src="/images/front.png" />
