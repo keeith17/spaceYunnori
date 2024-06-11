@@ -78,7 +78,7 @@ export default function FourYut() {
         width: isSmallScreen ? "45px" : "75px",
         height: isSmallScreen ? "45px" : "75px",
         marginTop: "20%",
-        background: "url(/images/버튼_사이즈조절.png) 50% 50% no-repeat",
+        background: "url(/images/button.webp) 50% 50% no-repeat",
         backgroundSize: "100% 100%",
         fontSize: "16px",
         outline: "none",
@@ -173,8 +173,7 @@ export default function FourYut() {
             sx={{
                 width: "100%",
                 height: "100%",
-                background:
-                    "url(/images/게임기_사이즈조절.png) 50% 50% no-repeat",
+                background: "url(/images/game.webp) 50% 50% no-repeat",
                 backgroundSize: isSmallScreen ? "100% 100%" : "contain",
             }}
         >
@@ -216,11 +215,11 @@ export default function FourYut() {
                         <LoadMotion />
                     ) : log[0]?.result?.one === "앞" ? (
                         <Box sx={stickBox}>
-                            <img src="/images/윷_앞면_사이즈조절.png" />
+                            <img src="/images/front.webp" />
                         </Box>
                     ) : (
                         <Box sx={stickBackBox}>
-                            <img src="/images/윷_뒷면_사이즈조절.png" />
+                            <img src="/images/back.webp" />
                         </Box>
                     )}
                 </Box>
@@ -237,11 +236,11 @@ export default function FourYut() {
                         <LoadMotion />
                     ) : log[0]?.result?.two === "앞" ? (
                         <Box sx={stickBox}>
-                            <img src="/images/윷_앞면_사이즈조절.png" />
+                            <img src="/images/front.webp" />
                         </Box>
                     ) : (
                         <Box sx={stickBackBox}>
-                            <img src="/images/윷_뒷면_사이즈조절.png" />
+                            <img src="/images/back.webp" />
                         </Box>
                     )}
                 </Box>
@@ -258,11 +257,11 @@ export default function FourYut() {
                         <LoadMotion />
                     ) : log[0]?.result?.three === "앞" ? (
                         <Box sx={stickBox}>
-                            <img src="/images/윷_앞면_사이즈조절.png" />
+                            <img src="/images/front.webp" />
                         </Box>
                     ) : (
                         <Box sx={stickBackBox}>
-                            <img src="/images/윷_뒷면_사이즈조절.png" />
+                            <img src="/images/back.webp" />
                         </Box>
                     )}
                 </Box>
@@ -276,11 +275,11 @@ export default function FourYut() {
                         <LoadMotion />
                     ) : log[0]?.result?.four === "앞" ? (
                         <Box sx={stickBox}>
-                            <img src="/images/윷_앞면_사이즈조절.png" />
+                            <img src="/images/front.webp" />
                         </Box>
                     ) : (
                         <Box sx={stickBackBox}>
-                            <img src="/images/윷_뒷면_X자_사이즈조절.png" />
+                            <img src="/images/backback.webp" />
                         </Box>
                     )}
                 </Box>

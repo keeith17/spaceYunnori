@@ -48,7 +48,7 @@ export const GlobalStyle = css`
         -moz-osx-font-smoothing: grayscale;
         overflow-x: overlay;
         overflow-y: overlay;
-        background: url(/images/배경.png) 50% 50% no-repeat;
+        background: url(/images/background.webp) 50% 50% no-repeat;
         background-size: cover;
         color: #ffffff;
         -webkit-user-select: none;
