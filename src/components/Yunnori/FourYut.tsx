@@ -1,7 +1,7 @@
 import AuthContext from "@/context/AuthContext";
 import { app, db } from "@/firebaseApp";
 import { CustomButton } from "@/pages/Login";
-import { Box, useMediaQuery, useTheme } from "@mui/material";
+import { Box, styled, useMediaQuery, useTheme } from "@mui/material";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { getAuth, signOut } from "firebase/auth";
 import {
@@ -16,6 +16,7 @@ import {
 } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import LoadMotion from "./LoadMotion";
+import { mainColor } from "@/commonStyle";
 
 interface LogProps {
     timeStamp: string;
@@ -64,6 +65,16 @@ const backbackBox = {
         width: "100%",
     },
 };
+
+export const MakeButton = styled("button")({
+    width: "90%",
+    height: "17%",
+    background: "url(/images/버튼_사이즈조절.png) 50% 50% no-repeat",
+    backgroundSize: "100% 100%",
+    fontSize: "16px",
+    outline: "none",
+    transition: "all .2s",
+});
 export default function FourYut() {
     const { user } = useContext(AuthContext);
     const userUid = user?.uid;
@@ -166,12 +177,18 @@ export default function FourYut() {
             sx={{
                 width: "100%",
                 height: "100%",
+                background:
+                    "url(/images/게임기_사이즈조절.png) 50% 50% no-repeat",
+                backgroundSize: "contain",
             }}
         >
             <Box
                 sx={{
                     width: "100%",
-                    hiehgt: "5%",
+                    height: "5%",
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
                 }}
             >
                 <button
@@ -187,30 +204,11 @@ export default function FourYut() {
             <Box
                 sx={{
                     width: "100%",
-                    height: "25%",
+                    height: "50%",
                     display: "flex",
                     flexFlow: "wrap",
                 }}
             >
-                <Box
-                    sx={{
-                        width: isSmallScreen ? "100%" : "20%",
-                        height: isSmallScreen ? "30%" : "100%",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                    }}
-                >
-                    <CustomButton
-                        sx={{
-                            border: "none",
-                        }}
-                        onClick={handleSubmit}
-                        disabled={load}
-                    >
-                        던져라!
-                    </CustomButton>
-                </Box>
                 <Box
                     sx={{
                         width: isSmallScreen ? "25%" : "20%",
@@ -293,25 +291,60 @@ export default function FourYut() {
             <Box
                 sx={{
                     width: "100%",
-                    height: "70%",
-                    overflow: "scroll",
+                    height: "50%",
+                    padding: "14% 13% 7% 14%",
                 }}
             >
-                {log.map((result, index) => (
+                <Box
+                    sx={{
+                        width: "100%",
+                        height: "100%",
+                        display: "flex",
+                    }}
+                >
                     <Box
-                        key={index}
                         sx={{
-                            width: "100%",
-                            padding: "10px",
-                            display: "flex",
-                            justifyContent: "center",
-                            fontSize: "16px",
-                            fontFamily: "nexonGothic",
+                            width: "85%",
+                            height: "100%",
+                            overflow: "scroll",
+                            marginRight: ".45vw",
                         }}
                     >
-                        {`${result?.name} 님이 ${result?.timeStamp} 에 윷을 던져 [${result?.result.one}, ${result?.result.two}, ${result?.result.three}, ${result?.result.four}]이 나왔습니다!`}
+                        {log.map((result, index) => (
+                            <Box
+                                key={index}
+                                sx={{
+                                    width: "100%",
+                                    padding: ".4vw",
+                                    display: "flex",
+                                    justifyContent: "flexStart",
+                                    fontSize: ".65vw",
+                                    fontFamily: "nexonGothic",
+                                }}
+                            >
+                                {`${result?.name} 님의 윷 결과 [${result?.result.one}, ${result?.result.two}, ${result?.result.three}, ${result?.result.four}] ${result?.timeStamp}`}
+                            </Box>
+                        ))}
                     </Box>
-                ))}
+
+                    <Box
+                        sx={{
+                            width: isSmallScreen ? "100%" : "15%",
+                            height: isSmallScreen ? "30%" : "100%",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }}
+                    >
+                        <MakeButton
+                            sx={{
+                                border: "none",
+                            }}
+                            onClick={handleSubmit}
+                            disabled={load}
+                        ></MakeButton>
+                    </Box>
+                </Box>
             </Box>
         </Box>
     );

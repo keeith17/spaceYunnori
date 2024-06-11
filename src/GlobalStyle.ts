@@ -48,7 +48,7 @@ export const GlobalStyle = css`
         -moz-osx-font-smoothing: grayscale;
         overflow-x: overlay;
         overflow-y: overlay;
-        background: url(/images/pexels-instawally-176851.jpg) 50% 50% no-repeat;
+        background: url(/images/배경.png) 50% 50% no-repeat;
         background-size: cover;
         color: #ffffff;
         -webkit-user-select: none;
@@ -115,11 +115,11 @@ export const GlobalStyle = css`
     }
 
     &::-webkit-scrollbar {
-        width: 5px;
+        width: 0.4vw;
     }
     &::-webkit-scrollbar-thumb {
         border-radius: 2px;
-        background: rgba(255, 255, 255, 0.8);
+        background: rgba(255, 255, 255, 0.2);
     }
     &::-webkit-scrollbar-track {
         background: transparent;

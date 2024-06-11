@@ -9,7 +9,7 @@ export default function Yunnori() {
         <Box sx={wrapStyle}>
             <Box
                 sx={{
-                    width: isSmallScreen ? "100%" : "50%",
+                    width: isSmallScreen ? "100%" : "30%",
                     height: "100%",
                 }}
             >
