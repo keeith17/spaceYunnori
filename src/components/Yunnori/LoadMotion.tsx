@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 export default function LoadMotion() {
     const [currentImage, setCurrentImage] = useState(0);
     const images = [
-        "url(/images/윷_앞면_사이즈조절.png)",
-        "url(/images/윷_뒷면_사이즈조절.png)",
-        "url(/images/윷_뒷면_X자_사이즈조절.png)",
+        "url(/images/front.webp)",
+        "url(/images/back.webp)",
+        "url(/images/backback.webp)",
     ];
 
     useEffect(() => {
@@ -16,7 +16,7 @@ export default function LoadMotion() {
 
         const timeout = setTimeout(() => {
             clearInterval(interval);
-        }, 700); // 5초 후에 인터벌 정지
+        }, 600); // 5초 후에 인터벌 정지
 
         return () => {
             clearInterval(interval);
@@ -33,7 +33,7 @@ export default function LoadMotion() {
                 backgroundPosition: "50% 50%",
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "contain",
-                transition: "background-image 0.05s linear",
+                transition: "background-image 0.1s linear",
             }}
         />
     );
