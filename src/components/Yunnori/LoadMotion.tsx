@@ -16,7 +16,7 @@ export default function LoadMotion() {
 
         const timeout = setTimeout(() => {
             clearInterval(interval);
-        }, 600); // 5초 후에 인터벌 정지
+        }, 700); // 5초 후에 인터벌 정지
 
         return () => {
             clearInterval(interval);
@@ -33,7 +33,7 @@ export default function LoadMotion() {
                 backgroundPosition: "50% 50%",
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "contain",
-                transition: "background-image 0.1s linear",
+                transition: "all 0.1s linear",
             }}
         />
     );

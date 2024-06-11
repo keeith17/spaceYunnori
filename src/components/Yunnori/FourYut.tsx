@@ -146,7 +146,7 @@ export default function FourYut() {
             setTimeout(() => {
                 setLoad(false);
                 setLog(dataObj as LogProps[]);
-            }, 1500);
+            }, 700);
             // setLoad(true);
             // setLog(dataObj as LogProps[]);
         });
