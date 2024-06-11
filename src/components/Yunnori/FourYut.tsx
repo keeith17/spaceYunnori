@@ -1,9 +1,13 @@
 import AuthContext from "@/context/AuthContext";
-import { app, db } from "@/firebaseApp";
-import { CustomButton } from "@/pages/Login";
-import { Box, styled, useMediaQuery, useTheme } from "@mui/material";
+import { db } from "@/firebaseApp";
+import {
+    Box,
+    Typography,
+    styled,
+    useMediaQuery,
+    useTheme,
+} from "@mui/material";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { getAuth, signOut } from "firebase/auth";
 import {
     addDoc,
     collection,
@@ -36,17 +40,7 @@ interface CharProps {
     uid: string;
 }
 
-const frontBox = {
-    width: "100%",
-    height: "100%",
-    padding: "15%",
-    display: "flex",
-    alignItems: "center",
-    img: {
-        width: "100%",
-    },
-};
-const backBox = {
+const stickBox = {
     width: "100%",
     height: "100%",
     display: "flex",
@@ -55,26 +49,17 @@ const backBox = {
         width: "100%",
     },
 };
-const backbackBox = {
+const stickBackBox = {
     width: "100%",
     height: "100%",
+    padding: "6%",
     display: "flex",
     alignItems: "center",
-    padding: "5%",
     img: {
         width: "100%",
     },
 };
 
-export const MakeButton = styled("button")({
-    width: "90%",
-    height: "17%",
-    background: "url(/images/버튼_사이즈조절.png) 50% 50% no-repeat",
-    backgroundSize: "100% 100%",
-    fontSize: "16px",
-    outline: "none",
-    transition: "all .2s",
-});
 export default function FourYut() {
     const { user } = useContext(AuthContext);
     const userUid = user?.uid;
@@ -88,6 +73,17 @@ export default function FourYut() {
         e.preventDefault();
         submitRecord.mutate();
     };
+
+    const MakeButton = styled("button")({
+        width: isSmallScreen ? "45px" : "75px",
+        height: isSmallScreen ? "45px" : "75px",
+        marginTop: "20%",
+        background: "url(/images/버튼_사이즈조절.png) 50% 50% no-repeat",
+        backgroundSize: "100% 100%",
+        fontSize: "16px",
+        outline: "none",
+        transition: "all .2s",
+    });
 
     const submitRecord = useMutation({
         mutationFn: async () => {
@@ -179,10 +175,10 @@ export default function FourYut() {
                 height: "100%",
                 background:
                     "url(/images/게임기_사이즈조절.png) 50% 50% no-repeat",
-                backgroundSize: "contain",
+                backgroundSize: isSmallScreen ? "100% 100%" : "contain",
             }}
         >
-            <Box
+            {/* <Box
                 sx={{
                     width: "100%",
                     height: "5%",
@@ -200,36 +196,37 @@ export default function FourYut() {
                 >
                     임시로그아웃
                 </button>
-            </Box>
+            </Box> */}
             <Box
                 sx={{
                     width: "100%",
                     height: "50%",
                     display: "flex",
-                    flexFlow: "wrap",
+                    padding: "15%",
+                    alignItems: "center",
                 }}
             >
                 <Box
                     sx={{
-                        width: isSmallScreen ? "25%" : "20%",
+                        width: "25%",
                         height: isSmallScreen ? "70%" : "100%",
                     }}
                 >
                     {load ? (
                         <LoadMotion />
                     ) : log[0]?.result?.one === "앞" ? (
-                        <Box sx={frontBox}>
-                            <img src="/images/front.png" />
+                        <Box sx={stickBox}>
+                            <img src="/images/윷_앞면_사이즈조절.png" />
                         </Box>
                     ) : (
-                        <Box sx={backBox}>
-                            <img src="/images/back.png" />
+                        <Box sx={stickBackBox}>
+                            <img src="/images/윷_뒷면_사이즈조절.png" />
                         </Box>
                     )}
                 </Box>
                 <Box
                     sx={{
-                        width: isSmallScreen ? "25%" : "20%",
+                        width: "25%",
                         height: isSmallScreen ? "70%" : "100%",
                         img: {
                             width: "100%",
@@ -239,18 +236,18 @@ export default function FourYut() {
                     {load ? (
                         <LoadMotion />
                     ) : log[0]?.result?.two === "앞" ? (
-                        <Box sx={frontBox}>
-                            <img src="/images/front.png" />
+                        <Box sx={stickBox}>
+                            <img src="/images/윷_앞면_사이즈조절.png" />
                         </Box>
                     ) : (
-                        <Box sx={backBox}>
-                            <img src="/images/back.png" />
+                        <Box sx={stickBackBox}>
+                            <img src="/images/윷_뒷면_사이즈조절.png" />
                         </Box>
                     )}
                 </Box>
                 <Box
                     sx={{
-                        width: isSmallScreen ? "25%" : "20%",
+                        width: "25%",
                         height: isSmallScreen ? "70%" : "100%",
                         img: {
                             width: "100%",
@@ -260,30 +257,30 @@ export default function FourYut() {
                     {load ? (
                         <LoadMotion />
                     ) : log[0]?.result?.three === "앞" ? (
-                        <Box sx={frontBox}>
-                            <img src="/images/front.png" />
+                        <Box sx={stickBox}>
+                            <img src="/images/윷_앞면_사이즈조절.png" />
                         </Box>
                     ) : (
-                        <Box sx={backBox}>
-                            <img src="/images/back.png" />
+                        <Box sx={stickBackBox}>
+                            <img src="/images/윷_뒷면_사이즈조절.png" />
                         </Box>
                     )}
                 </Box>
                 <Box
                     sx={{
-                        width: isSmallScreen ? "25%" : "20%",
+                        width: "25%",
                         height: isSmallScreen ? "70%" : "100%",
                     }}
                 >
                     {load ? (
                         <LoadMotion />
                     ) : log[0]?.result?.four === "앞" ? (
-                        <Box sx={frontBox}>
-                            <img src="/images/front.png" />
+                        <Box sx={stickBox}>
+                            <img src="/images/윷_앞면_사이즈조절.png" />
                         </Box>
                     ) : (
-                        <Box sx={backbackBox}>
-                            <img src="/images/backback.png" />
+                        <Box sx={stickBackBox}>
+                            <img src="/images/윷_뒷면_X자_사이즈조절.png" />
                         </Box>
                     )}
                 </Box>
@@ -292,7 +289,9 @@ export default function FourYut() {
                 sx={{
                     width: "100%",
                     height: "50%",
-                    padding: "14% 13% 7% 14%",
+                    padding: isSmallScreen
+                        ? "18% 10% 12% 12%"
+                        : "14% 13% 7% 14%",
                 }}
             >
                 <Box
@@ -306,8 +305,8 @@ export default function FourYut() {
                         sx={{
                             width: "85%",
                             height: "100%",
-                            overflow: "scroll",
-                            marginRight: ".45vw",
+                            overflowY: "scroll",
+                            marginRight: isSmallScreen ? "1%" : "2%",
                         }}
                     >
                         {log.map((result, index) => (
@@ -315,22 +314,43 @@ export default function FourYut() {
                                 key={index}
                                 sx={{
                                     width: "100%",
-                                    padding: ".4vw",
+                                    padding: isSmallScreen ? "1%" : "1%",
                                     display: "flex",
                                     justifyContent: "flexStart",
-                                    fontSize: ".65vw",
+                                    alignItems: "flex-end",
                                     fontFamily: "nexonGothic",
                                 }}
                             >
-                                {`${result?.name} 님의 윷 결과 [${result?.result.one}, ${result?.result.two}, ${result?.result.three}, ${result?.result.four}] ${result?.timeStamp}`}
+                                <Typography
+                                    sx={{
+                                        fontSize: isSmallScreen
+                                            ? "3.3vw"
+                                            : ".6vw",
+                                    }}
+                                >
+                                    {`${result?.name} 님의 결과 [${result?.result.one}, ${result?.result.two}, ${result?.result.three}, ${result?.result.four}]`}
+                                </Typography>
+                                <Typography
+                                    sx={{
+                                        display: "flex",
+                                        alignItems: "flex-end",
+                                        paddingLeft: "2%",
+                                        fontSize: isSmallScreen
+                                            ? "2.4vw"
+                                            : ".45vw",
+                                        color: mainColor,
+                                    }}
+                                >
+                                    {result?.timeStamp.slice(13, 22)}
+                                </Typography>
                             </Box>
                         ))}
                     </Box>
 
                     <Box
                         sx={{
-                            width: isSmallScreen ? "100%" : "15%",
-                            height: isSmallScreen ? "30%" : "100%",
+                            width: isSmallScreen ? "15%" : "15%",
+                            height: "100%",
                             display: "flex",
                             justifyContent: "center",
                             alignItems: "center",
